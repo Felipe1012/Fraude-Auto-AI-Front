@@ -86,7 +86,7 @@ export class CovidComponent implements OnInit {
         
 
 
-        this.probabilidad = res.predictions[0].values[0][1][1]
+        this.probabilidad = res.predictions[0].values[0][1][0]
         this.probabilidad_number=parseFloat(this.probabilidad)*100
         this.probabilidad=this.probabilidad_number.toFixed(2) + '%'
           
