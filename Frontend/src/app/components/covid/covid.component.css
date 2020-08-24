@@ -2,32 +2,22 @@
 {
   box-shadow: 2px 2px 5px #999;
   width:1000px;
-  height: 900px;
   margin:0px auto;
-  
+  background-color: rgb(226, 226, 253);
 
 }
+
 
 .general
 {
 
-  width:500px;
-  height: 600px;
+  width:370px;
   margin:0px auto;
-
-
-}
-
-#left {
-   float:left }
-#right { float:right }
-
-.boton{
-  margin-top: 35.9em;
-
- 
+  font-size: large;
 
 }
+
+
 .resultado{
   box-shadow: 2px 2px 5px #999;
 

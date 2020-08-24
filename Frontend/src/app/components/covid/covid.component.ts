@@ -17,15 +17,12 @@ export class CovidComponent implements OnInit {
 
   loading
 
-  private URL = 'http://back1-project-x.openshift-43-ea9753cca330b7f05a99ad5b2c8b5da1-0000.us-east.containers.appdomain.cloud/api/';
+  private URL = 'http://localhost:3000/api/';
 
   txt
   textModelo
   nl
   texto: any[] = [];
-
-
-
 
 
 
@@ -46,52 +43,40 @@ export class CovidComponent implements OnInit {
   ngOnInit(): void {
   }
   x="";
+  y=""
   respuesta = [];
   fraude="";
   probabilidad=""
   probabilidad_number=0;
   PostAutoIA() {
 
-    var a = this.texto.map(function (item) {
-      return parseInt(item, 10);
-
-    });
-    this.form.input_data[0].values[0] = (a)
-    console.log(this.form);
-    var datos = JSON.stringify(this.form)
+    
+    var datos = (this.texto)
 
 
     var salida = {
       "text": datos
     }
 
-    console.log(datos);
+    console.log(salida);
     this.httpClient.post<any>(`${this.URL}upload-text`, salida).subscribe(
       (res) => {
 
         this.textModelo = res
         this.respuesta.push(res)
-        this.x =JSON.stringify(res.predictions[0].values)
-        console.log("respuesta "+this.x)
+        console.log(this.respuesta)
 
 
-        this.fraude =res.predictions[0].values[0][0]
 
-        if(this.fraude=="1"){
-          this.fraude="Hay fraude"
-        }else{
-          this.fraude="No hay fraude"
-        }
-        console.log(this.fraude)
-        
-
-
+console.log(this.x)
+console.log(this.y)
+       /* this.fraude =res.predictions[0].values[0][0]
         this.probabilidad = res.predictions[0].values[0][1][0]
         this.probabilidad_number=parseFloat(this.probabilidad)*100
         this.probabilidad=this.probabilidad_number.toFixed(2) + '%'
           
         console.log("probabilidad "+this.probabilidad_number)
-
+*/
         
       },
       (err) => {

@@ -1,115 +1,49 @@
+<body>
 
-<br>
+  <div class=pag>
+    <div class="general">
+      <div align="center">
+        <hr>
+        <br>
+        <b>
+          Consulta sobre ventas de carros en Colombia
+        </b>
+      </div>
+      <br>
+      <br>
 
-<div class= pag>
-<div class="general">
-  <div align="center"><img src="https://i.postimg.cc/RZkbWYWs/logo.png"></div>
-
-
-  <br>
-  <br>
-  <div id="left">
-
-    <p>
-      <mat-form-field appearance="fill">
-        <mat-label>Género</mat-label>
-        <input matInput placeholder="1-0" [(ngModel)]="texto[0]" >
+      <mat-form-field>
+        <mat-label>Busqueda</mat-label>
+        <input matInput placeholder="Ej: BMW" [(ngModel)]="texto">
       </mat-form-field>
 
-    </p>
-    <p>
-      <mat-form-field appearance="fill">
-        <mat-label>¿Casado?</mat-label>
-        <input matInput placeholder="1-0"  [(ngModel)]="texto[1]">
-      </mat-form-field>
-    </p>
-    <p>
-      <mat-form-field appearance="fill">
-        <mat-label>Dependientes</mat-label>
-        <input matInput placeholder="Número de personas a cargo" [(ngModel)]="texto[2]">
-      </mat-form-field>
-    </p>
-    <p>
-      <mat-form-field appearance="fill">
-        <mat-label>Educación</mat-label>
-        <input matInput placeholder="1-0" [(ngModel)]="texto[3]">
-      </mat-form-field>
+      <p>
+        <button mat-raised-button color="primary" class="boton" (click)="PostAutoIA()">Consultar</button>
+      </p>
+      <br>
+      <br>
 
-    </p>
-    <p>
-      <mat-form-field appearance="fill">
-        <mat-label>¿Independiente?</mat-label>
-        <input matInput placeholder="1-0" [(ngModel)]="texto[4]">
-      </mat-form-field>
-
-    </p>
-    <p>
-      <mat-form-field appearance="fill">
-        <mat-label>Ingresos solicitante</mat-label>
-        <input matInput placeholder="Valor en números" [(ngModel)]="texto[5]">
-      </mat-form-field>
-
-    </p>
+      <div class="resultado">
+        <div *ngFor="let item of respuesta">
+          <div *ngFor="let item2 of item" class="resultado">
+            <div *ngFor="let item3 of item2">
+              <hr>
+              <p>Relación: {{item3.type}}</p>
+              <hr>
+              <p>Frase: {{item3.sentence}}</p>
+              <hr>
+              <div *ngFor="let item4 of item3.arguments">
+                <div *ngFor="let item5 of item4.entities">
+                  <p>{{item5.type}}: {{item5.text}}</p>
+                </div>
+              </div>
+            </div>
+            <br>
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div id="right">
-    <p>
-      <mat-form-field appearance="fill">
-        <mat-label>Ingresos codeudor</mat-label>
-        <input matInput placeholder="Valor en números" [(ngModel)]="texto[6]">
-      </mat-form-field>
-
-    </p>
-    <p>
-      <mat-form-field appearance="fill">
-        <mat-label>Monto prestamos</mat-label>
-        <input matInput placeholder="Valor en números" [(ngModel)]="texto[7]">
-      </mat-form-field>
-    </p>
-    <p>
-      <mat-form-field appearance="fill">
-        <mat-label>Plazo prestamo</mat-label>
-        <input matInput placeholder="Valor en números" [(ngModel)]="texto[8]">
-      </mat-form-field>
-    </p>
-
-    <p>
-      <mat-form-field appearance="fill">
-        <mat-label>¿Historial crediticio?</mat-label>
-        <input matInput placeholder="1-0" [(ngModel)]="texto[9]">
-      </mat-form-field>
-
-    </p>
-    <p>
-      <mat-form-field appearance="fill">
-        <mat-label>Vivienda</mat-label>
-        <input matInput placeholder="1-0" [(ngModel)]="texto[10]">
-      </mat-form-field>
-
-    </p>
-    <p>
-      <mat-form-field appearance="fill">
-        <mat-label>Localidad</mat-label>
-        <input matInput placeholder="0-1-2-3" [(ngModel)]="texto[11]">
-      </mat-form-field>
-
-    </p>
- 
-  </div>
-  <BR>
-    <br>
-
-
-  <button mat-raised-button color="primary" class="boton" (click)="PostAutoIA()" >Predecir</button>
-
-  <br>
-  <br>
-<hr>
-
-<div class="resultado" *ngIf="fraude">
-  <div>
-  <p>{{fraude}} Con probabilidad de {{probabilidad}}</p>
-</div>
-
-</div>
-
+</body>
