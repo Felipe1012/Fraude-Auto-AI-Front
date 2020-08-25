@@ -27,6 +27,9 @@ export class CovidComponent implements OnInit {
 
 
 
+
+
+
   public form = {
 
     input_data: [{
@@ -43,40 +46,52 @@ export class CovidComponent implements OnInit {
   ngOnInit(): void {
   }
   x="";
-  y=""
   respuesta = [];
   fraude="";
   probabilidad=""
   probabilidad_number=0;
   PostAutoIA() {
 
-    
-    var datos = (this.texto)
+    var a = this.texto.map(function (item) {
+      return parseInt(item, 10);
+
+    });
+    this.form.input_data[0].values[0] = (a)
+    console.log(this.form);
+    var datos = JSON.stringify(this.form)
 
 
     var salida = {
       "text": datos
     }
 
-    console.log(salida);
+    console.log(datos);
     this.httpClient.post<any>(`${this.URL}upload-text`, salida).subscribe(
       (res) => {
 
         this.textModelo = res
         this.respuesta.push(res)
-        console.log(this.respuesta)
+        this.x =JSON.stringify(res.predictions[0].values)
+        console.log("respuesta "+this.x)
 
 
+        this.fraude =res.predictions[0].values[0][0]
 
-console.log(this.x)
-console.log(this.y)
-       /* this.fraude =res.predictions[0].values[0][0]
+        if(this.fraude=="1"){
+          this.fraude="Hay fraude"
+        }else{
+          this.fraude="No hay fraude"
+        }
+        console.log(this.fraude)
+        
+
+
         this.probabilidad = res.predictions[0].values[0][1][0]
         this.probabilidad_number=parseFloat(this.probabilidad)*100
         this.probabilidad=this.probabilidad_number.toFixed(2) + '%'
           
         console.log("probabilidad "+this.probabilidad_number)
-*/
+
         
       },
       (err) => {
