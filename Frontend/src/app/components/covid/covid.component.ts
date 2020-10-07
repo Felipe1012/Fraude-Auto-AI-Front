@@ -33,7 +33,7 @@ export class CovidComponent implements OnInit {
   public form = {
 
     input_data: [{
-      fields: ["Gender", "Married", "Dependents", "Education", "Self_Employed", "ApplicantIncome", "CoapplicantIncome", "LoanAmount", "Loan_Term", "Credit_History_Available", "Housing", "Locality"],
+      fields:["Genero","Casado","Personas Dependientes","Educacion","Trabajador Independiente","Ingresos solicitante","Ingresos codeudor","Monto Prestamo","Termino Prestamo","Historial crediticio disponible","Propietario de casa","Localidad"],
       values: [[]]
     }]
 
@@ -53,7 +53,7 @@ export class CovidComponent implements OnInit {
   PostAutoIA() {
 
     var a = this.texto.map(function (item) {
-      return parseInt(item, 10);
+      return (item);
 
     });
     this.form.input_data[0].values[0] = (a)
@@ -62,8 +62,9 @@ export class CovidComponent implements OnInit {
 
 
     var salida = {
-      "text": datos
+      "text": this.form
     }
+
 
     console.log(datos);
     this.httpClient.post<any>(`${this.URL}upload-text`, salida).subscribe(
